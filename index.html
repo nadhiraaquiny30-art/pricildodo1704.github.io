@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CoolSweet Naaqueny</title>
+<!-- Google Fonts for nice text -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat&display=swap" rel="stylesheet" />
+<style>
+  /* Reset dan Style Dasar */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #FFB6C1, #87CEFA);
+    color: #333;
+    line-height: 1.6;
+  }
+
+  /* Header */
+  header {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    text-align: center;
+    position: relative;
+  }
+
+  header h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 36px;
+    color: #ff69b4; /* pink */
+  }
+
+  /* Navigation */
+  nav {
+    margin-top: 10px;
+  }
+
+  nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+
+  nav a:hover {
+    color: #ff69b4;
+  }
+
+  /* Slider */
+  .slider {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+
+  .slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .slide {
+    min-width: 100%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+
+  .slide img {
+    width: 100%;
+    display: block;
+    height: 400px;
+    object-fit: cover;
+  }
+
+  /* Buttons for slider */
+  .prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.7);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+
+  .prev:hover, .next:hover {
+    background: rgba(255,255,255,1);
+  }
+
+  .prev {
+    left: 10px;
+  }
+
+  .next {
+    right: 10px;
+  }
+
+  /* Produk */
+  .products {
+    max-width: 1200px;
+    margin: 40px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .product-card {
+    background: #fff;
+    border-radius: 10px;
+    margin: 15px;
+    padding: 15px;
+    width: 250px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+  }
+
+  .product-card:hover {
+    transform: scale(1.05);
+  }
+
+  .product-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .product-name {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  .product-price {
+    color: #ff69b4;
+    font-size: 1.1em;
+    margin-top: 5px;
+  }
+
+  button.add-to-cart {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    background: #ff69b4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+  button.add-to-cart:hover {
+    background: #ff1493;
+  }
+
+  /* Cart & Checkout */
+  .cart-section {
+    max-width: 800px;
+    margin: 40px auto;
+    background: rgba(255,255,255,0.8);
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  h2 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  table th, table td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+  }
+
+  .total {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  button.checkout {
+    margin-top: 20px;
+    padding: 15px 30px;
+    background: #87CEFA;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  button.checkout:hover {
+    background: #00BFFF;
+  }
+
+  /* Footer */
+  footer {
+    background: rgba(255,255,255,0.8);
+    padding: 20px;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 14px;
+    color: #555;
+  }
+
+  /* Animasi dan Efek lainnya */
+  .fade-in {
+    animation: fadeIn 2s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+  <h1>CoolSweet Naaqueny</h1>
+  <nav>
+    <a href="#home">Beranda</a>
+    <a href="#products">Produk</a>
+    <a href="#cart">Keranjang</a>
+    <a href="#checkout">Checkout</a>
+  </nav>
+</header>
+
+<!-- Slider Foto -->
+<div class="slider" id="home">
+  <div class="slides" id="slides">
+    <div class="slide"><img src="https://images.unsplash.com/photo-1574226516831-e1dff420e75e?ixlib=rb-4.0.4&auto=format&fit=crop&w=1600&q=80" alt="Ice Cream 1"></div>
+    <div class="slide"><img src="https://images.unsplash.com/photo-1618005197117-1a8e736b8b36?ixlib=rb-4.0.4&auto=format&fit=crop&w=1600&q=80" alt="Ice Cream 2"></div>
+    <div class="slide"><img src="https://images.unsplash.com/photo-1592835237863-3e9e6f8e33e8?ixlib=rb-4.0.4&auto=format&fit=crop&w=1600&q=80" alt="Ice Cream 3"></div>
+  </div>
+  <button class="prev" id="prevBtn">&#10094;</button>
+  <button class="next" id="nextBtn">&#10095;</button>
+</div>
+
+<!-- Produk -->
+<section id="products" style="padding:40px 20px;">
+  <h2 style="text-align:center; margin-bottom:30px;">Produk Es Krim</h2>
+  <div class="products" id="productList">
+    <!-- Produk akan muncul di sini secara otomatis -->
+  </div>
+</section>
+
+<!-- Keranjang -->
+<section id="cart" class="cart-section" style="display:none;">
+  <h2>Keranjang Belanja</h2>
+  <table id="cartTable">
+    <thead>
+      <tr>
+        <th>Produk</th>
+        <th>Jumlah</th>
+        <th>Harga</th>
+        <th>Subtotal</th>
+        <th>Hapus</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <div class="total" id="totalPrice">Total: Rp 0</div>
+  <button class="checkout" id="checkoutBtn">Checkout</button>
+</section>
+
+<!-- Checkout -->
+<section id="checkout" class="cart-section" style="display:none;">
+  <h2>Checkout</h2>
+  <p>Terima kasih sudah berbelanja di CoolSweet Naaqueny!</p>
+  <p>Pesanan Anda sedang diproses.</p>
+</section>
+
+<!-- Footer -->
+<footer>
+  &copy; 2024 Nadhira Aquiny Pricillia Widodo - CoolSweet Naaqueny. All rights reserved.
+</footer>
+
+<!-- Script JavaScript -->
+<script>
+  // Data produk
+  const products = [
+    { id: 1, name: 'Es Krim Cokelat', price: 25000, image: 'https://images.unsplash.com/photo-1618252436299-0a66b86a2f7f?ixlib=rb-4.0.4&auto=format&fit=crop&w=400&q=80' },
+    { id: 2, name: 'Es Krim Vanila', price: 20000, image: 'https://images.unsplash.com/photo-1601196268654-899b7f2b4b91?ixlib=rb-4.0.4&auto=format&fit=crop&w=400&q=80' },
+    { id: 3, name: 'Es Krim Stroberi', price: 23000, image: 'https://images.unsplash.com/photo-1617130928104-07f66b036f2b?ixlib=rb-4.0.4&auto=format&fit=crop&w=400&q=80' },
+    { id: 4, name: 'Es Krim Matcha', price: 27000, image: 'https://images.unsplash.com/photo-1574226516831-e1dff420e75e?ixlib=rb-4.0.4&auto=format&fit=crop&w=400&q=80' },
+  ];
+
+  let cart = [];
+
+  // Fungsi buat produk di halaman
+  function displayProducts() {
+    const container = document.getElementById('productList');
+    products.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'product-card fade-in';
+
+      card.innerHTML = `
+        <img src="${p.image}" class="product-img" alt="${p.name}">
+        <div class="product-name">${p.name}</div>
+        <div class="product-price">Rp ${p.price.toLocaleString()}</div>
+        <button class="add-to-cart" onclick="addToCart(${p.id})">Tambah ke Keranjang</button>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  // Slider foto
+  let slideIndex = 0;
+  const slides = document.getElementById('slides');
+  const totalSlides = slides.children.length;
+
+  function showSlide(index) {
+    if(index >= totalSlides) slideIndex=0;
+    if(index < 0) slideIndex=totalSlides-1;
+    slides.style.transform = 'translateX(' + (-slideIndex * 100) + '%)';
+  }
+
+  document.getElementById('nextBtn').onclick = () => {
+    slideIndex++;
+    showSlide(slideIndex);
+  }
+  document.getElementById('prevBtn').onclick = () => {
+    slideIndex--;
+    showSlide(slideIndex);
+  }
+
+  // Otomatis slide
+  setInterval(() => {
+    slideIndex++;
+    showSlide(slideIndex);
+  }, 3000);
+
+  // Tambah ke keranjang
+  function addToCart(id) {
+    const produk = products.find(p => p.id === id);
+    const index = cart.findIndex(c => c.id === id);
+    if(index >= 0) {
+      cart[index].quantity++;
+    } else {
+      cart.push({ ...produk, quantity:1 });
+    }
+    updateCart();
+  }
+
+  // Update tampilan keranjang
+  function updateCart() {
+    const tbody = document.querySelector('#cartTable tbody');
+    tbody.innerHTML = '';
+    let total = 0;
+    cart.forEach(item => {
+      const subtotal = item.price * item.quantity;
+      total += subtotal;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${item.name}</td>
+        <td>${item.quantity}</td>
+        <td>Rp ${item.price.toLocaleString()}</td>
+        <td>Rp ${subtotal.toLocaleString()}</td>
+        <td><button onclick="removeFromCart(${item.id})">Hapus</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+    document.getElementById('totalPrice').innerText = 'Total: Rp ' + total.toLocaleString();
+  }
+
+  // Hapus dari keranjang
+  function removeFromCart(id) {
+    cart = cart.filter(c => c.id !== id);
+    updateCart();
+  }
+
+  // Tampilkan keranjang
+  function showCart() {
+    document.querySelector('#cart').style.display = 'block';
+    document.querySelector('#products').style.display = 'none';
+    document.querySelector('#checkout').style.display = 'none';
+  }
+
+  // Checkout
+  document.getElementById('checkoutBtn').onclick = () => {
+    alert('Terima kasih! Pesanan kamu sedang diproses.');
+    // Reset keranjang
+    cart = [];
+    updateCart();
+    document.querySelector('#cart').style.display = 'none';
+    document.querySelector('#products').style.display = 'block';
+  }
+
+  // Event navigasi
+  document.querySelectorAll('nav a').forEach(link => {
+    link.onclick = (e) => {
+      e.preventDefault();
+      const target = e.target.getAttribute('href');
+      document.querySelectorAll('section').forEach(sec => sec.style.display='none');
+      if(target === '#home') {
+        document.querySelector('#home').style.display='block';
+      } else if(target === '#products') {
+        document.querySelector('#products').style.display='block';
+      } else if(target === '#cart') {
+        showCart();
+      } else if(target === '#checkout') {
+        document.querySelector('#checkout').style.display='block';
+      }
+    }
+  });
+
+  // Inisialisasi
+  window.onload = () => {
+    displayProducts();
+    showSlide(slideIndex);
+  }
+</script>
+</body>
+</html>
